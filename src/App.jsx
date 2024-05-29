@@ -1,32 +1,43 @@
 import playerData from "./playerData.js"
-
+import { useState } from "react";
 
 
 function BaseballCard(props) {
-  // console.log(props)
-  // return (
-  //   <div className="card">
-  //     <h2>{props.name}</h2>
-  //     <img src={props.imgUrl} alt={props.name} />
-  //   </div>
-// );
 
-const statsDisplay =
+  const [showPicture, setShowPicture] = useState(true);
 
-Object.entries(props.stats).map(([statName, statValue]) => (
-    <p key={statName}>
-      {statName}: {statValue}
-    </p>
-));
+  const toggleCard = () => {
+    setShowPicture(!showPicture);
+  };
 
-return (
-  <div className="card">
-    <h2>{props.name}</h2>
-    <p>Team: {props.team}</p>
-    <p>Position: {props.position}</p>
-    {statsDisplay}
-  </div>
-);
+  if (showPicture) {
+    console.log(props)
+    return (
+      <div className="card" onClick={toggleCard}>
+        <h2>{props.name}</h2>
+        <img src={props.imgUrl} alt={props.name} />
+      </div>
+  );
+} else {
+
+  const statsDisplay =
+
+  Object.entries(props.stats).map(([statName, statValue]) => (
+      <p key={statName}>
+        {statName}: {statValue}
+      </p>
+  ));
+
+
+  return (
+    <div className="card" onClick={toggleCard}>
+      <h2>{props.name}</h2>
+      <p>Team: {props.team}</p>
+      <p>Position: {props.position}</p>
+      {statsDisplay}
+    </div>
+  );
+  }
 }
 
 
